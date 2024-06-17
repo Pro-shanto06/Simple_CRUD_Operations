@@ -1,7 +1,7 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
-const API_BASE_URL = 'http://localhost:4000';
-// const API_BASE_URL = 'https://simple-crud-operations.onrender.com/';
+// const API_BASE_URL = 'http://localhost:4000';
+const API_BASE_URL = 'https://simple-crud-operations.onrender.com';
 
 export const fetchEmployees = async () => {
   try {

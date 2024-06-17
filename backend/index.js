@@ -6,18 +6,18 @@ const cors = require('cors');
 const app = express();
 
 app.use(bodyParser.json());
-// app.use(cors(
-//     {
-//     origin : 'https://simple-crud-operation-project.vercel.app',
-//     methods: ["POST","GET","PUT","DELETE"],
-//     credentials : true
-//     }
-//     ));
-app.use(cors({
-    origin: 'http://localhost:3000', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true 
-}));
+app.use(cors(
+    {
+    origin : 'https://simple-crud-operations.vercel.app/',
+    methods: ["POST","GET","PUT","DELETE"],
+    credentials : true
+    }
+    ));
+// app.use(cors({
+//     origin: 'http://localhost:3000', 
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     credentials: true 
+// }));
 
 app.use('/employees', employeeRoutes);
 
