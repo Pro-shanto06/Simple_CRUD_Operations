@@ -103,7 +103,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing
           <div className="mb-2">
             <label className="block text-gray-700">Phone Number</label>
             <input
-              type="text"
+              type="number"
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
