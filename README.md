@@ -2,6 +2,8 @@
 
 The Employee Management System is a web application built with React that allows users to manage employee information including adding new employees, viewing employee details, updating employee information, blocking/unblocking employees, and deleting employees.
 
+## Live Demo
+Check out the live demo of the project : https://simple-crud-operations.vercel.app
 
 ## Features
 
@@ -44,7 +46,7 @@ MONGO_URI=<your_mongodb_uri>
 
 4. **Start the Server**:
 ```bash
-nod server.js
+node server.js
 ```
 
 5. **Install Client Dependencies**:
