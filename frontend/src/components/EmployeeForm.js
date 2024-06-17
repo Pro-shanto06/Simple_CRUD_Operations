@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing, setIsEditing }) => {
+const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing, setIsEditing, setIsTableVisible  }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -44,6 +44,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing
       } else {
         await addEmployee(formData);
         setSuccessMessage('Employee added successfully');
+        setIsTableVisible(true);
       }
       setFormData({ firstName: '', lastName: '', email: '', phoneNumber: '' });
       setIsFormVisible(false);
@@ -52,14 +53,19 @@ const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
       setError(err.response.data.error || 'An error occurred');
+      setIsTableVisible(true);
     }
   };
+  
 
   return (
     <div>
       {!isFormVisible && !isEditing && (
         <button
-          onClick={() => setIsFormVisible(true)}
+          onClick={() => {
+            setIsFormVisible(true);
+            setIsTableVisible(false);
+          }}
           className="px-4 py-2 bg-blue-500 text-white rounded"
         >
           Create Employee

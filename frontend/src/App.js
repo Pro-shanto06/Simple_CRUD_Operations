@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  fetchEmployees,
-  fetchEmployee,
-  addEmployee,
-  deleteEmployee,
-  blockEmployee,
-  updateEmployee
-} from './services/employeeService';
+import { fetchEmployees, fetchEmployee, addEmployee, deleteEmployee, blockEmployee, updateEmployee} from './services/employeeService';
 import EmployeeForm from './components/EmployeeForm';
 import EmployeeTable from './components/EmployeeTable';
 import EmployeeDetails from './components/EmployeeDetails';
@@ -22,6 +15,8 @@ const App = () => {
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [error, setError] = useState('');
+  const [isTableVisible, setIsTableVisible] = useState(true);
+
 
   useEffect(() => {
     const getEmployees = async () => {
@@ -44,12 +39,16 @@ const App = () => {
       setEmployees([...employees, newEmployee]);
       setSuccessMessage('Employee added successfully');
       setTimeout(() => setSuccessMessage(''), 3000);
+      setIsTableVisible(true);
     } catch (error) {
       setError(error.response.data.error || 'An error occurred');
       setTimeout(() => setError(''), 3000);
+      setIsTableVisible(true);
     }
     setIsLoading(false);
   };
+  
+  
 
   const handleDeleteEmployee = async () => {
     setIsLoading(true);
@@ -95,11 +94,6 @@ const App = () => {
     setIsLoading(false);
   };
 
-  const handleSelectEmployee = async (id) => {
-    const employee = await fetchEmployee(id);
-    setSelectedEmployee(employee);
-    setIsEditing(true);
-  };
 
   const handleViewEmployeeDetails = async (id) => {
     const employee = await fetchEmployee(id);
@@ -120,31 +114,31 @@ const App = () => {
   return (
     <div className="container mx-auto p-4">
       {isLoading && <Loader />}
-
+  
       <h1 className="text-2xl font-bold mb-4">ASIF INC</h1>
-
+  
       <EmployeeForm
         addEmployee={handleAddEmployee}
         updateEmployee={handleUpdateEmployee}
         selectedEmployee={selectedEmployee}
         isEditing={isEditing}
         setIsEditing={setIsEditing}
+        setIsTableVisible={setIsTableVisible} 
       />
-
-      {employees.length > 0 && !isEditing && !selectedEmployee && (
+  
+      {isTableVisible && employees.length > 0 && !isEditing && !selectedEmployee && (
         <EmployeeTable
           employees={employees}
           deleteEmployee={handleOpenModal}
           blockEmployee={handleBlockEmployee}
-          selectEmployee={handleSelectEmployee}
           viewEmployeeDetails={handleViewEmployeeDetails}
         />
       )}
-
-      {employees.length === 0 && (
+  
+      { employees.length === 0 && (
         <p className="text-gray-600 text-center mt-4">No employees found.</p>
       )}
-
+  
       {selectedEmployee && !isEditing && (
         <EmployeeDetails
           employee={selectedEmployee}
