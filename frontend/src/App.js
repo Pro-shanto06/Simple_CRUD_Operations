@@ -43,7 +43,6 @@ const App = () => {
     } catch (error) {
       setError(error.response.data.error || 'An error occurred');
       setTimeout(() => setError(''), 3000);
-      setIsTableVisible(true);
     }
     setIsLoading(false);
   };
@@ -121,6 +120,7 @@ const App = () => {
         addEmployee={handleAddEmployee}
         updateEmployee={handleUpdateEmployee}
         selectedEmployee={selectedEmployee}
+        setSelectedEmployee={setSelectedEmployee}
         isEditing={isEditing}
         setIsEditing={setIsEditing}
         setIsTableVisible={setIsTableVisible} 

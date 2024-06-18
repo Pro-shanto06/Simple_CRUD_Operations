@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing, setIsEditing, setIsTableVisible  }) => {
+const EmployeeForm = ({ addEmployee, updateEmployee,  setSelectedEmployee, selectedEmployee, isEditing, setIsEditing, setIsTableVisible  }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -53,7 +53,6 @@ const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
       setError(err.response.data.error || 'An error occurred');
-      setIsTableVisible(true);
     }
   };
   
@@ -65,6 +64,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing
           onClick={() => {
             setIsFormVisible(true);
             setIsTableVisible(false);
+            setSelectedEmployee(null);
           }}
           className="px-4 py-2 bg-blue-500 text-white rounded"
         >
@@ -130,6 +130,7 @@ const EmployeeForm = ({ addEmployee, updateEmployee, selectedEmployee, isEditing
               setFormData({ firstName: '', lastName: '', email: '', phoneNumber: '' });
               setError('');
               setSuccessMessage('');
+              setIsTableVisible(true);
             }}
             className="ml-2 px-4 py-2 bg-gray-500 text-white rounded"
           >
